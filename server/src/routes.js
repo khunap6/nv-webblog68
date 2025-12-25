@@ -1,4 +1,19 @@
+const AuthenticationController = require('./controllers/AuthenticationController')
+const AuthenticationController = require('./controllers/AuthenticationController')
+const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const UserController = require('./controllers/UserController')
+
+module.exports = (app) => {
+    app.post('/register', 
+        AuthenticationControllerPolicy.register, // ตรวจสอบก่อน
+        AuthenticationController.register        // ถ้าผ่านค่อยบันทึก
+    )
+}
+
+module.exports = (app) => {
+    // Route สำหรับสมัครสมาชิก
+    app.post('/register', AuthenticationController.register)
+}
 
 module.exports = (app) => {
     /* RESFUL Api for users management */
