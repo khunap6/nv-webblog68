@@ -1,40 +1,15 @@
-const Promise = require('bluebird') // *หมายเหตุ: Sequelize v6 รองรับ Promise ในตัว แต่เพื่อความชัวร์ในบาง env ใช้ async/await โดยตรงได้เลย
-const bcrypt = require('bcryptjs')
-
-function hashPassword (user, options) {
-    const SALT_FACTOR = 8
-    if (!user.changed('password')) {
-        return
-    }
-    return bcrypt.genSalt(SALT_FACTOR)
-        .then(salt => bcrypt.hash(user.password, salt, null))
-        .then(hash => {
-            user.setDataValue('password', hash)
-        })
-}
-
 module.exports = (sequelize, DataTypes) => {
+    // กำหนดโครงสร้างตาราง User
     const User = sequelize.define('User', {
-        name: DataTypes.STRING,
-        lastname: DataTypes.STRING,
         email: {
             type: DataTypes.STRING,
-            unique: true
+            unique: true // อีเมล์ต้องไม่ซ้ำ
         },
         password: DataTypes.STRING,
-        status: DataTypes.STRING
-    }, {
-        hooks: {
-            // ดักจับก่อนสร้าง (create) หรือแก้ไข (update)
-            beforeCreate: hashPassword,
-            beforeUpdate: hashPassword
-        }
+        name: DataTypes.STRING,
+        lastname: DataTypes.STRING,
+        status: DataTypes.STRING,
+        type: DataTypes.STRING
     })
-
-    // เพิ่ม Method สำหรับตรวจสอบรหัสผ่าน (ใช้ตอน Login)
-    User.prototype.comparePassword = function (password) {
-        return bcrypt.compare(password, this.password)
-    }
-
     return User
 }

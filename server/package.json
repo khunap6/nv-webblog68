@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "nodejs vuejs webblog server (backend)",
   "license": "ISC",
-  "author": "Nattapon Kumyaito",
+  "author": "Kanlayanee Ratsameethong",
   "type": "commonjs",
   "main": "src/app.js",
   "scripts": {
@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "body-parser": "^2.2.1",
-    "express": "^5.2.1"
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7"
   }
 }
