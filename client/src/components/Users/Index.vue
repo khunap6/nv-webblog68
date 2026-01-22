@@ -29,6 +29,20 @@ export default {
     navigateTo(route) {
       this.$router.push(route)
     },
+    async deleteUser(user) {
+      let result = confirm("Want to delete?")
+      if (result) {
+        try {
+          await UsersService.delete(user)
+          this.refreshData()
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    },
+    async refreshData() {
+      this.users = (await UsersService.index()).data
+    }
   },
   data() {
     return {
@@ -42,21 +56,8 @@ export default {
     } catch (error) {
       console.log(error)
     }
-  },
-  async deleteUser (user) {
-    let result = confirm("Want to delete?")
-    if (result) {
-        try {
-            await UsersService.delete(user)
-            this.refreshData()
-        } catch (err) {
-            console.log(err)
-        }
-    }
-},
-async refreshData() {
-    this.users = (await UsersService.index()).data
-}
+  }
+
 }
 </script>
 
