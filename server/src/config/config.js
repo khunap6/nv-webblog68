@@ -7,6 +7,9 @@ module.exports = {
         options: {
             dialect: process.env.DIALECT || 'sqlite',
             storage: './nvwebblog-db.sqlite' //ชื่อไฟล์ฐานข้อมูลที่จะถูกสร้างขึ้น
+        },
+        authentication: {
+            jwtSecret: process.env.JWT_SECRET || 'secret'
         }
     }
 }

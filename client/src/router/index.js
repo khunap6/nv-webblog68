@@ -4,6 +4,7 @@ import UserIndex from '../components/Users/Index.vue'
 import UserCreate from '../components/Users/CreateUser.vue'
 import UserEdit from '../components/Users/EditUser.vue'
 import UserShow from '../components/Users/ShowUser.vue'
+import Login from '../components/Login.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/user/:userId', // เพิ่ม :userId
       name: 'user',
       component: UserShow
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
 
   ]
