@@ -8,6 +8,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
+require('./userPassport')
 // เรียกใช้ Routes ที่เราแยกไฟล์ไว้
 require('./routes')(app)
 
