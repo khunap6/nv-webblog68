@@ -1,55 +1,43 @@
 <template>
-  <div>
+ <div>
     <h1>Edit User</h1>
-    <form v-on:submit.prevent="editUser">
-      <p>name: <input type="text" v-model="user.name"></p>
-      <p>lastname: <input type="text" v-model="user.lastname"></p>
-      <p>email: <input type="text" v-model="user.email"></p>
-      <p>password: {{ user.password }}</p>
-      <p><button type="submit">edit user</button></p>
+    <form v-on:submit.prevent = "editUser">
+        <p>name: <input type="text" v-model="user.name"></p>
+        <p>lastname: <input type="text" v-model="user.lastname"></p>
+        <p>email: <input type="text" v-model="user.email"></p>
+        <p>password: {{this.user.password}}</p>
+        <p><button type="submit">edit user</button></p>
     </form>
+    </div>
 
-  </div>
 </template>
 
 <script>
-import UsersService from '../../services/UsersService'
-
+import UsersService from '../../services/UsersService';
 export default {
-  data() {
-    return {
-      user: {
-        name: '',
-        lastname: '',
-        email: '',
-        password: '',
-        status: 'active'
-      }
+  data(){
+    return{
+      user: null
     }
   },
-  methods: {
-    async editUser() {
-      try {
-        await UsersService.put(this.user)
-        this.$router.push({
-          name: 'users'
-        })
-      } catch (err) {
-        console.log(err)
-      }
+  methods:{
+    async editUser(){
+      await UsersService.put(this.user)
+      this.$router.push({
+                    name: 'users'
+                })
     }
   },
-  async created() {
-    try {
-      let userId = this.$route.params.userId
-      this.user = (await UsersService.show(userId)).data
-    } catch (error) {
-      console.log(error)
+  async created(){
+    try{
+      this.user = (await UsersService.show(this.$route.params.userId)).data
+      console.log('edit user: '+ this.user)
+    }catch{
+      console.log('error')
     }
   }
 }
 </script>
-
 
 <style scoped>
 /* CSS เฉพาะหน้านี้ */

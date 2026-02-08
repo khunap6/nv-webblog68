@@ -1,7 +1,6 @@
-const { User } = require('../models')
 const bcrypt = require('bcrypt')
 
-async function hashPassword(user, options) {
+async function hashPassword (user, options) {
     if (!user.changed('password')) {
         return
     }
@@ -11,11 +10,10 @@ async function hashPassword(user, options) {
 }
 
 module.exports = (sequelize, DataTypes) => {
-    // กำหนดโครงสร้างตาราง User
     const User = sequelize.define('User', {
         email: {
             type: DataTypes.STRING,
-            unique: true // อีเมล์ต้องไม่ซ้ำ
+            unique: true
         },
         password: DataTypes.STRING,
         name: DataTypes.STRING,

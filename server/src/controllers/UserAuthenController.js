@@ -1,4 +1,4 @@
-const {User} = require('../models')
+const { User } = require('../models')
 const config = require('../config/config')
 const jwt = require('jsonwebtoken')
 
@@ -15,6 +15,7 @@ module.exports = {
             const user = await User.create(req.body)
             res.send(user.toJSON())
         } catch (error) {
+            console.error(error)
             res.status(400).send({
                 error: 'The content information was incorrect'
             })
@@ -49,6 +50,7 @@ module.exports = {
                 token: jwtSignUser(userJSON)
             })
         } catch (error) {
+            console.error(error)
             res.status(500).send({
                 error: 'Error! from get user'
             })
