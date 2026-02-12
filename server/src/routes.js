@@ -1,7 +1,7 @@
 const isAuthenController = require('./controllers/isAuthenController')
 const UserController = require('./controllers/UserController')
 const UserAuthenController = require('./controllers/UserAuthenController')
-// const BlogController = require('./controllers/BlogController')
+const BlogController = require('./controllers/BlogController')
 // const UploadController = require('./controllers/UploadController')
 // const fileUploadMiddleware = require('./middleware/fileUpload') // Import Middleware
 
@@ -18,19 +18,19 @@ module.exports = (app) => {
   app.post('/register', UserAuthenController.register)
   // blog route
   // create blog
-  // app.post('/blog', BlogController.create)
+   app.post('/blog', BlogController.create)
 
   // edit blog, suspend, active
-  // app.put('/blog/:blogId', BlogController.put)
+   app.put('/blog/:blogId', BlogController.put)
 
   // delete blog
-  // app.delete('/blog/:blogId', BlogController.remove)
+   app.delete('/blog/:blogId', BlogController.remove)
 
   // get blog by id
-  // app.get('/blog/:blogId', BlogController.show)
+   app.get('/blog/:blogId', BlogController.show)
 
   // get all blog
-  // app.get('/blogs', BlogController.index)
+   app.get('/blogs', BlogController.index)
   
   // Route สำหรับ Upload โดยเฉพาะ
   // logic: เรียก middleware ก่อน -> ถ้าผ่าน -> เรียก controller
